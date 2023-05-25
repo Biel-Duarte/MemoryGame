@@ -18,7 +18,7 @@ const handleSubmit = (event) => {
     //Prevent refresh of the pag
     event.preventDefault();
     
-    localStorage.setItem("Player", input.value);
+    localStorage.setItem("player", input.value);
 
     window.location = "pages/game.html";
 } 
