@@ -1,7 +1,8 @@
 const grid = document.querySelector(".grid");
 const spanPlayer = document.querySelector(".player");
 const timer = document.querySelector(".timer");
-
+const winnerMessage = document.getElementById("winnerMessage");
+let initTimer = 0;
 
 const characters = [
     'beth',
@@ -28,9 +29,11 @@ let secondCard = "";
 const checkEndGame = () => {
     const disabledCards = document.querySelectorAll(".disabled-card");
 
-    if (disabledCards.length() === 20) {
+    if (disabledCards.length === 20) {
         clearInterval(this.loop);
-        alert(`Parabéns ${spanPlayer.innerHTML}! Seu tempo foi: ${timer.innerHTML}`);
+        startConfetti();
+        //winnerMessage.removeAttribute('style');
+        winnerMessage.classList.remove("hidden");
     }
 }
 
@@ -59,10 +62,16 @@ const checkCards = () => {
 
         }, 500) 
     }
-
 }
 
 const revealCard = ({ target }) => {
+
+    if (initTimer === 1) {
+        startTimer();
+    }
+    initTimer++;
+
+
 
     if (target.parentNode.className.includes("reveal-card")) {
         return;
@@ -125,9 +134,9 @@ const startTimer = () => {
 }
 
 window.onload = () => {
-    spanPlayer.innerHTML = localStorage.getItem('player');
-    startTimer();
+    spanPlayer.innerHTML = localStorage.getItem('player'); 
     loadGame();
 }
+
 
 

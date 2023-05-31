@@ -22,6 +22,28 @@ header {
     border-radius: 5px;
 }
 
+canvas {
+    display:block;
+    position:absolute;
+    z-index:999999;
+    pointer-events:none;
+}
+
+.centered-message {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d3fb5b;
+    padding: 10px;
+    font-size: 24px;
+    color: black;
+    animation: confetti 5s forwards;
+}
+ .hidden {
+    display: none;
+ }
 
 .grid {
     display: grid;
@@ -72,3 +94,4 @@ header {
     filter: saturate(0);
     opacity: 0.5;
 }
+
