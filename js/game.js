@@ -1,4 +1,5 @@
 const grid = document.querySelector(".grid");
+const Player = document.querySelector("#player");
 const spanPlayer = document.querySelector(".player");
 const timer = document.querySelector(".timer");
 const winnerMessage = document.getElementById("winnerMessage");
@@ -31,6 +32,7 @@ const checkEndGame = () => {
 
     if (disabledCards.length === 20) {
         clearInterval(this.loop);
+        Player.textContent = spanPlayer.textContent;
         startConfetti();
         //winnerMessage.removeAttribute('style');
         winnerMessage.classList.remove("hidden");
@@ -57,6 +59,8 @@ const checkCards = () => {
             firstCard.classList.remove("reveal-card");
             secondCard.classList.remove("reveal-card");
 
+            firstCard.style.cursor = "pointer";
+            secondCard.style.cursor = "pointer";
             firstCard = "";
             secondCard = "";
 
@@ -72,7 +76,6 @@ const revealCard = ({ target }) => {
     initTimer++;
 
 
-
     if (target.parentNode.className.includes("reveal-card")) {
         return;
         }
@@ -81,16 +84,16 @@ const revealCard = ({ target }) => {
 
         target.parentNode.classList.add("reveal-card");
         firstCard = target.parentNode;
-        
+        firstCard.style.cursor = "";
     } else if (secondCard === "") {
         
         target.parentNode.classList.add("reveal-card");
         secondCard = target.parentNode;
-
+        secondCard.style.cursor = "";
         checkCards();
 
     }
-
+    console.log("First Card: ", firstCard);
 
 }
 
@@ -100,6 +103,7 @@ const createCard = (character) => {
     const front = createElement("div", "face front");
     const back = createElement("div", "face back");
 
+    card.style.cursor = "pointer";
     front.style.backgroundImage = `url("../images/${character}.png")`;
 
     //appendChild used to insert the div's into the mother div
@@ -130,7 +134,7 @@ const startTimer = () => {
         const currentTime = +timer.innerHTML;
         timer.innerHTML = currentTime + 1;
     }, 1000);
-
+    
 }
 
 window.onload = () => {
